@@ -4,7 +4,7 @@ with open('report.txt',encoding='utf-8') as f:
     i = 0
     list_lines = []
     for line in f.readlines():
-        if bool(line) == True:
+        if line:
             list_line = line.split()
             i += 1
             if i > 1:
@@ -21,8 +21,6 @@ with open('report.txt',encoding='utf-8') as f:
             list_lines.append(list_line)
             list1 = sorted(list_lines[1:],key=lambda x:x[-1],reverse=True)
             list1.insert(0,list_lines[0])
-        else:
-            pass
 #添加名次列
 list2 = []
 n = 0
