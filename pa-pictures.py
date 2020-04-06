@@ -20,7 +20,10 @@ for i in range(3):
         link = 'https:'+link
         filename = link.split('/')[-1]
         try:
-            urllib.request.urlretrieve(link,'pics/'+filename)
+            # urllib.request.urlretrieve(link,'pics/'+filename)
+            pics = requests.get(link)
+            with open('pics/'+filename,'wb') as f:
+                f.write(pics.content)  # 用content，不用text！！！
         except:
             print(link,'fail')
         else:
