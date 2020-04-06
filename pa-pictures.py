@@ -1,6 +1,25 @@
 import requests
 import urllib.request
 from bs4 import BeautifulSoup
+import threading
+
+def down_pics(link):
+    print(link,'--------linking\n')
+    filename = link.split('/')[-1]
+    retries = 0
+    while retries < 3:
+        try:
+            # urllib.request.urlretrieve(link,'pics/'+filename)
+            pics = requests.get(link, timeout=30)
+            with open('pics/' + filename, 'wb') as f:
+                f.write(pics.content)  # 用content，不用text！！！
+        except requests.exceptions.RequestException as e:
+            print(e)
+            print(link, 'fail')
+            retries += 1
+        else:
+            print(link, 'succeed')
+            break
 
 url = 'https://www.qiushibaike.com/imgrank/page/7'
 for i in range(3):
@@ -18,19 +37,7 @@ for i in range(3):
     for j in result:
         link = j.img['src']
         link = 'https:' + link
-        filename = link.split('/')[-1]
-        retries = 0
-        while retries < 3:
-            try:
-                # urllib.request.urlretrieve(link,'pics/'+filename)
-                pics = requests.get(link,timeout=30)
-                with open('pics/'+filename,'wb') as f:
-                    f.write(pics.content)  # 用content，不用text！！！
-            except requests.exceptions.RequestException as e:
-                print(e)
-                print(link,'fail')
-                retries += 1
-            else:
-                print(link,'succeed')
-                break
+        k = threading.Thread(target=down_pics,args=(link,))  # link后面要加逗号
+        k.start()
+
     url = 'https://www.qiushibaike.com/imgrank/page/%d'%next_page
