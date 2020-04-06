@@ -15,8 +15,6 @@ for i in range(3):
     next_page = cur_page - 1
     print('========this in the page %d========'%cur_page)
 
-
-
     for j in result:
         link = j.img['src']
         link = 'https:' + link
