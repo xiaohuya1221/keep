@@ -15,17 +15,24 @@ for i in range(3):
     next_page = cur_page - 1
     print('========this in the page %d========'%cur_page)
 
+
+
     for j in result:
         link = j.img['src']
-        link = 'https:'+link
+        link = 'https:' + link
         filename = link.split('/')[-1]
-        try:
-            # urllib.request.urlretrieve(link,'pics/'+filename)
-            pics = requests.get(link)
-            with open('pics/'+filename,'wb') as f:
-                f.write(pics.content)  # 用content，不用text！！！
-        except:
-            print(link,'fail')
-        else:
-            print(link,'succeed')
+        retries = 0
+        while retries < 3:
+            try:
+                # urllib.request.urlretrieve(link,'pics/'+filename)
+                pics = requests.get(link,timeout=30)
+                with open('pics/'+filename,'wb') as f:
+                    f.write(pics.content)  # 用content，不用text！！！
+            except requests.exceptions.RequestException as e:
+                print(e)
+                print(link,'fail')
+                retries += 1
+            else:
+                print(link,'succeed')
+                break
     url = 'https://www.qiushibaike.com/imgrank/page/%d'%next_page
