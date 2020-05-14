@@ -27,6 +27,6 @@ while whether == 'y':
             break
 print('game is over,welcome again')
 
-data = '%s : %d , %d , %.2f'%(name,times,min_round,count/times)
-with open('game_one_user.txt','w') as f:
+data = '%s : %d , %d , %.2f \n'%(name,times,min_round,count/times)
+with open('game_one_user.txt','a') as f:
     f.write(data)
