@@ -12,11 +12,10 @@ with open('game_one_user.txt','r') as file:
 
 # 查看是新用户还是老用户,并输出历史数据
 user_name = input('what is your name:')
-try:
-    dic[user_name]
+if dic.get(user_name):
     print(user_name + ',you have played %s times,%s rounds is the fastest,\
 %.2f rounds is in average.Start!' % (dic[user_name][0], dic[user_name][1], int(dic[user_name][2]) / int(dic[user_name][0])))
-except KeyError:
+else:
     dic[user_name] = ['0','0','0']
     print(user_name + ',you have played 0 time,0 round is the fastest,0 round is in average.Start!')
 
