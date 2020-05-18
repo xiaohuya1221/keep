@@ -3,6 +3,7 @@ from random import randint
 name = input('what is your name:')
 count = 0   # 总轮数
 times = 0   # 记录次数
+min_round = 0
 whether = 'y'
 while whether == 'y':
     num = randint(1, 100)
@@ -17,8 +18,8 @@ while whether == 'y':
         elif guess < num:
             print('too small,guess again')
         else:
-            print('bingo,you have guessed %d times' %round)
-            if times == 1 or min_round > round:
+            print('bingo,you have guessed %d times' % round)
+            if min_round ==0 or min_round > round:
                 min_round = round
             else:
                 pass
@@ -27,6 +28,6 @@ while whether == 'y':
             break
 print('game is over,welcome again')
 
-data = '%s  %d  %d  %.2f \n'%(name,times,min_round,count/times)
+data = '%s  %d  %d  %d \n'%(name,times,min_round,count)
 with open('game_one_user.txt','a') as f:
     f.write(data)
