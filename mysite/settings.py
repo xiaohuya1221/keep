@@ -25,7 +25,7 @@ SECRET_KEY = '4lba_xtv**w10(4sd91!0-#tk(l*-p^=i*-4su&3@zk$4&i1bl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['xiaohuya.pythonanywhere.com','127.0.0.1']
 
 
 # Application definition
